@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588797191711.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3372727845",
+    "id" : "C7E819A8",
+    "lastKnownWriteTime" : 1588800982,
+    "last_content_update" : 1588800982982,
+    "path" : "D:/Bryan/Documents/SDSU/2020-1 Spring/CS 558/math_class_simulator/presentation_plots.R",
+    "project_path" : "presentation_plots.R",
+    "properties" : {
+        "cursorPosition" : "23,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

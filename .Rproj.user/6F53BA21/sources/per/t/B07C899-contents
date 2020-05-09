@@ -1,0 +1,87 @@
+library(ggplot2)
+# Problem 2
+
+counts <- c(192, 163, 124, 85, 46, 17, 11)
+n <- sum(counts)
+# mean is equal to 1/rate, hence 1/(1/20) = 20
+rate <- 1/20
+
+# calculate expected probabilities
+intervals <- seq(from = 0, to = 60, by = 10)
+expected <- sapply(1:length(intervals), function(i){
+  if (i == length(intervals)){
+    # find probability above final value
+    return(pexp(intervals[i], rate = rate, lower.tail = FALSE))
+  }
+  else{
+    # otherwise, find probability in bounded interval
+    return(pexp(intervals[i + 1], rate = rate) - pexp(intervals[i], rate = rate))
+  }
+})
+
+# calculate test statistic
+chiSquare <- sum((counts - (n * expected))^2 / (n * expected))
+# answer is 58.9495
+
+# Problem 3
+
+iaTimes <- c(3.6, 4.2, 0.3, 2.1, 0.7, 3.3, 3.3, 4.1, 3.2, 4.7, 3.0, 3.1, 2.1, 1.5, 2.4, 3.6, 1.9, 3.2, 4.7, 2.8)
+serviceTimes <- c(1.2, 1.7, 2.3, 3.6, 4.0, 4.5, 4.8, 4.5, 2.1, 1.1, 4.9, 3.3, 1.6, 1.3, 1.2, 2.7, 4.8, 3.4, 2.8, 2.9)
+
+# generates num random variates based on distribution of vars
+invTransform <- function(vars, num){
+  pdf <- density(vars)
+  f <- approxfun(pdf$x, pdf$y, yleft = 0, yright = 0)
+  cdf <- function(x){
+    integrate(f, -Inf, x)$value
+  }
+  invcdf <- function(q){
+    uniroot(function(x){cdf(x) - q}, interval = range(vars), extendInt = "yes")$root
+  }
+  rands <- sapply(runif(num, min = 0.1, max = 0.9), invcdf)
+  return(rands)
+}
+
+# generate random distributions
+iaDist <- invTransform(iaTimes, 1000)
+serviceDist <- invTransform(serviceTimes, 1000)
+
+# load simulator function
+source("queue_server_sim.R")
+
+# helper functions to generate inter-arrival and service times easily
+genIaTimes <- function(){invTransform(iaDist, 100)}
+genServiceTimes <- function(){invTransform(serviceDist, 100)}
+
+# helper function to produce 1 simulation run and retrieve avg. wait time
+runSim <- function(){
+  data <- queueServerSim(genIaTimes(), genServiceTimes(), 1, 1)
+  avgWait <- mean(data$waitTimes, na.rm = TRUE)
+  return(avgWait)
+}
+
+# run 1000 simulations
+waitTimes <- replicate(1000, runSim())
+data <- data.frame(waitTimes)
+
+# plot resultant distributions
+
+# plot of PDF overlaid with exponential and lognormal distributions
+pdfPlot <- ggplot(data = data) +
+  geom_histogram(mapping = aes(x = waitTimes, y = ..density..), binwidth = 0.5, colour = "black", fill = "white") +
+  geom_density(mapping = aes(x = waitTimes), size = 1.5, color = "blue") +
+  stat_function(fun = dlnorm, args = list(meanlog = log(mean(data$waitTimes)), sdlog = log(sd(data$waitTimes))), size = 1.5, color = "green") +
+  stat_function(fun = dexp, args = list(rate = 1/mean(data$waitTimes)), size = 1.5, color = "red") +
+  labs(x = "Average Wait Time", y = "Density (Percent of Simulations)",
+       title = "Distribution of Average Wait Times")
+
+show(pdfPlot)
+ggsave("prob3_pdf.png", plot = pdfPlot)
+
+cdfPlot <- ggplot(data = data, mapping = aes(x = waitTimes)) +
+  stat_ecdf(geom = "step", size = 1) +
+  labs(x = "Cost", y = "Cumulative Probability",
+       title = "Cumulative Distribution of Average Wait Times")
+
+show(cdfPlot)
+ggsave("prob3_cdf.png", plot = cdfPlot)

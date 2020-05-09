@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588627622391.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "669527701",
+    "id" : "A5070219",
+    "lastKnownWriteTime" : 1588811195,
+    "last_content_update" : 1588811195442,
+    "path" : "D:/Bryan/Documents/SDSU/2020-1 Spring/CS 558/math_class_simulator/simulation.R",
+    "project_path" : "simulation.R",
+    "properties" : {
+        "cursorPosition" : "134,47",
+        "scrollLine" : "116",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

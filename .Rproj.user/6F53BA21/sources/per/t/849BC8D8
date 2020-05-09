@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588627426632.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "584869714",
+    "id" : "849BC8D8",
+    "lastKnownWriteTime" : 1534888294,
+    "last_content_update" : 1534888294,
+    "path" : "D:/Bryan/Documents/SDSU/2020-1 Spring/CS 558/math_class_simulator/app.R",
+    "project_path" : "app.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

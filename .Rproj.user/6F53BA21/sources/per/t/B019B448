@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588805732865.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B019B448",
+    "lastKnownWriteTime" : 6998715218728021609,
+    "last_content_update" : 1588805732865,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "2E61332C",
+        "caption" : "quizPerformanceDistribution",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=quizPerformanceDistribution&cache_key=2E61332C",
+        "displayedObservations" : 8,
+        "environment" : "",
+        "object" : "quizPerformanceDistribution",
+        "preview" : 0,
+        "totalObservations" : 8,
+        "variables" : 4
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
